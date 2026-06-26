@@ -1,0 +1,31 @@
+READ results: [
+ {
+ ride_name: 'Thunder Coaster',
+ description: 'High-speed thrill ride',
+ duration: '2 Minutes',
+ min_height: '120 cm'
+ },
+ {
+ ride_name: 'Haunted Mansion',
+ description: 'Spooky dark ride',
+ duration: '4 Minutes',
+ min_height: '110 cm'
+ }
+]
+Ride Added
+Rows Updated: 1
+Rows Deleted: 1
+READ results: [
+ {
+ ride_name: 'Thunder Coaster',
+ description: 'High-speed thrill ride',
+ duration: '3 Minutes',
+ min_height: '120 cm'
+ },
+ {
+ ride_name: 'Galaxy Spinner',
+ description: 'Family Ride',
+ duration: '5 Minutes',
+ min_height: '100 cm'
+ }
+]
