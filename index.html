@@ -5,24 +5,184 @@
  <meta name=viewport content=width=device-width, initial-scale=1.0 />
  <title>GLA6 Theme Park</title>
  <style>
- body { font-family: Segoe UI, Arial, sans-serif; margin: 0; background: #f4f7fb; color: #1f2d3d; }
- .wrap { max-width: 760px; margin: 48px auto; background: #fff; border-radius: 14px; padding: 28px; box-shadow: 0 10px 26px rgba(0,0,0,.08); }
- h1 { margin-top: 0; color: #174a7c; }
- p { line-height: 1.6; }
- a { color: #0a66c2; text-decoration: none; }
- a:hover { text-decoration: underline; }
- .meta { margin-top: 16px; padding: 12px; background: #eef5ff; border-left: 4px solid #0a66c2; border-radius: 8px; }
+ :root {
+ --ink: #2b2a3a;
+ --muted: #5f5a71;
+ --warm-1: #ff9a3c;
+ --warm-2: #ff5e78;
+ --warm-3: #ffd166;
+ --bg: #fff7ef;
+ --card: rgba(255,255,255,0.9);
+ --ring: rgba(255, 94, 120, 0.3);
+ }
+
+ * { box-sizing: border-box; }
+
+ body {
+ margin: 0;
+ font-family: Segoe UI, Trebuchet MS, Arial, sans-serif;
+ color: var(--ink);
+ background:
+ radial-gradient(circle at 10% 10%, rgba(255, 154, 60, 0.35), transparent 28%),
+ radial-gradient(circle at 90% 0%, rgba(255, 94, 120, 0.28), transparent 24%),
+ radial-gradient(circle at 50% 100%, rgba(255, 209, 102, 0.32), transparent 34%),
+ var(--bg);
+ min-height: 100vh;
+ display: grid;
+ place-items: center;
+ padding: 24px;
+ }
+
+ .shell {
+ width: min(880px, 100%);
+ background: var(--card);
+ border: 1px solid rgba(255,255,255,0.75);
+ border-radius: 24px;
+ box-shadow: 0 18px 48px rgba(53, 30, 70, 0.14);
+ overflow: hidden;
+ backdrop-filter: blur(8px);
+ }
+
+ .hero {
+ padding: 30px 30px 16px;
+ background: linear-gradient(135deg, rgba(255,154,60,0.18), rgba(255,94,120,0.18));
+ border-bottom: 1px solid rgba(0,0,0,0.05);
+ }
+
+ .badge {
+ display: inline-block;
+ font-weight: 700;
+ font-size: 12px;
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ color: #7a2f3f;
+ background: rgba(255,255,255,0.8);
+ border: 1px solid rgba(255,94,120,0.25);
+ border-radius: 999px;
+ padding: 6px 10px;
+ margin-bottom: 10px;
+ }
+
+ h1 {
+ margin: 0;
+ font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+ line-height: 1.1;
+ color: #2c233a;
+ }
+
+ .sub {
+ margin: 12px 0 0;
+ font-size: 1.03rem;
+ color: var(--muted);
+ max-width: 64ch;
+ line-height: 1.6;
+ }
+
+ .grid {
+ display: grid;
+ gap: 14px;
+ grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+ padding: 20px 30px 10px;
+ }
+
+ .card {
+ border-radius: 16px;
+ padding: 14px;
+ background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,248,238,0.95));
+ border: 1px solid rgba(255, 94, 120, 0.12);
+ box-shadow: 0 8px 22px rgba(55, 28, 73, 0.08);
+ }
+
+ .card h2 {
+ margin: 0 0 8px;
+ font-size: 1.02rem;
+ color: #55335d;
+ }
+
+ .card p {
+ margin: 0;
+ color: var(--muted);
+ line-height: 1.5;
+ font-size: 0.95rem;
+ }
+
+ .actions {
+ padding: 12px 30px 28px;
+ display: flex;
+ flex-wrap: wrap;
+ gap: 10px;
+ }
+
+ .btn {
+ display: inline-flex;
+ align-items: center;
+ justify-content: center;
+ text-decoration: none;
+ font-weight: 700;
+ border-radius: 12px;
+ padding: 10px 14px;
+ transition: transform 0.2s ease, box-shadow 0.2s ease;
+ }
+
+ .btn-primary {
+ color: #fff;
+ background: linear-gradient(135deg, var(--warm-2), #ff7f50);
+ box-shadow: 0 10px 22px rgba(255, 94, 120, 0.28);
+ }
+
+ .btn-ghost {
+ color: #6a3d53;
+ border: 1px solid rgba(106, 61, 83, 0.25);
+ background: rgba(255,255,255,0.75);
+ }
+
+ .btn:hover {
+ transform: translateY(-1px);
+ }
+
+ .footer {
+ padding: 0 30px 24px;
+ color: #7a7688;
+ font-size: 0.86rem;
+ }
+
+ a:focus-visible, .btn:focus-visible {
+ outline: 3px solid var(--ring);
+ outline-offset: 2px;
+ }
  </style>
 </head>
 <body>
- <main class=wrap>
- <h1>GLA6 Theme Park</h1>
- <p>This temporary live page is published from the repository root so deployment is available while GitHub Actions billing restrictions are being resolved.</p>
- <p>Repository: <a href=https://github.com/ChampagneCODE3D/GLA6-Theme-Park>ChampagneCODE3D/GLA6-Theme-Park</a></p>
- <div class=meta>
- <strong>Status:</strong> Single-page fallback deployment active.<br />
- <strong>Next step:</strong> restore full workflow-based publish once account billing lock is cleared.
- </div>
+ <main class=shell>
+ <section class=hero>
+ <span class=badge>GLA6 Live Fallback</span>
+ <h1>Theme Park Portfolio is Live</h1>
+ <p class=sub>Warm and playful single-page deployment is active while full workflow publishing gets finalized. You have a working URL now and can swap in the full build the moment Actions restrictions are lifted.</p>
+ </section>
+
+ <section class=grid>
+ <article class=card>
+ <h2>Current Status</h2>
+ <p>Branch-based Pages deployment is active from main root and publicly reachable.</p>
+ </article>
+ <article class=card>
+ <h2>Next Step</h2>
+ <p>Re-enable the full workflow-driven publish for the complete multi-page experience.</p>
+ </article>
+ <article class=card>
+ <h2>Repository</h2>
+ <p>Source of truth remains in the ChampagneCODE3D GLA6 project repository.</p>
+ </article>
+ </section>
+
+ <section class=actions>
+ <a class=btn btn-primary href=https://github.com/ChampagneCODE3D/GLA6-Theme-Park>Open Repository</a>
+ <a class=btn btn-ghost href=https://github.com/ChampagneCODE3D/GLA6-Theme-Park/actions/workflows/portfolio-pages.yml>View Workflow</a>
+ </section>
+
+ <section class=footer>
+ Published on GitHub Pages - ChampagneCODE3D/GLA6-Theme-Park
+ </section>
  </main>
 </body>
 </html>
