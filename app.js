@@ -24,22 +24,60 @@ const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('./themepark.sqlite');
 
+function initializeDatabase(callback){
+  db.run(
+    `
+    CREATE TABLE IF NOT EXISTS rides (
+      ride_name TEXT PRIMARY KEY,
+      description TEXT,
+      duration TEXT,
+      min_height TEXT
+    )
+    `,
+    (err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      db.run(
+        `
+        INSERT OR IGNORE INTO rides (ride_name, description, duration, min_height)
+        VALUES
+        ('Thunder Coaster', 'High-speed thrill ride', '2 Minutes', '120 cm'),
+        ('Haunted Mansion', 'Spooky dark ride', '4 Minutes', '110 cm')
+        `,
+        (seedErr) => {
+          if (seedErr) {
+            console.log(seedErr);
+            return;
+          }
+
+          callback();
+        }
+      );
+    }
+  );
+}
+
 /*
  * READ OPERATION
  * Expected: Display all rides from the rides table.
  * Fixed: Changed 'FORM' to 'FROM'
  */
 
-function readOperation(){
+function readOperation(callback){
   db.all(
     'SELECT * FROM rides',
     [],
     (err,rows)=>{
       if(err){
         console.log(err);
+        if (callback) callback(err);
         return;
       }
-      console.log(rows);
+      console.log('READ results:', rows);
+      if (callback) callback(null, rows);
     }
   );
 }
@@ -54,7 +92,7 @@ function readOperation(){
  * Fixed: Changed 'INSERT rides' to 'INSERT INTO rides'
  */
 
-function createOperation(){
+function createOperation(callback){
   db.run(
     `
     INSERT INTO rides
@@ -82,9 +120,11 @@ function createOperation(){
     function(err){
       if(err){
         console.log(err);
+        if (callback) callback(err);
         return;
       }
       console.log('Ride Added');
+      if (callback) callback(null);
     }
   );
 }
@@ -98,7 +138,7 @@ function createOperation(){
  * Fixed: Changed 'UPDATE ride' to 'UPDATE rides' (table name)
  */
 
-function updateOperation(){
+function updateOperation(callback){
   db.run(
     `
     UPDATE rides
@@ -113,9 +153,11 @@ function updateOperation(){
     function(err){
       if(err){
         console.log(err);
+        if (callback) callback(err);
         return;
       }
       console.log('Rows Updated:',this.changes);
+      if (callback) callback(null);
     }
   );
 }
@@ -126,7 +168,7 @@ function updateOperation(){
  * Fixed: Changed 'DELETE rides' to 'DELETE FROM rides'
  */
 
-function deleteOperation(){
+function deleteOperation(callback){
   db.run(
     `
     DELETE FROM rides
@@ -138,12 +180,14 @@ function deleteOperation(){
     function(err){
       if(err){
         console.log(err);
+        if (callback) callback(err);
         return;
       }
       console.log(
         'Rows Deleted:',
         this.changes
       );
+      if (callback) callback(null);
     }
   );
 }
@@ -153,10 +197,29 @@ function deleteOperation(){
  * Uncomment each operation
  * once you fix the errors.
  */
-// readOperation();
-// createOperation();
-// updateOperation();
-// deleteOperation();
+db.serialize(() => {
+  initializeDatabase(() => {
+    readOperation((readErr) => {
+      if (readErr) return;
+
+      createOperation((createErr) => {
+        if (createErr) return;
+
+        updateOperation((updateErr) => {
+          if (updateErr) return;
+
+          deleteOperation((deleteErr) => {
+            if (deleteErr) return;
+
+            readOperation(() => {
+              db.close();
+            });
+          });
+        });
+      });
+    });
+  });
+});
 
 /*
  * STUDENT TASKS
