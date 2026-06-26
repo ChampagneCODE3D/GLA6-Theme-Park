@@ -1,0 +1,56 @@
+name: Portfolio Report Publish
+
+on:
+  push:
+    branches:
+      - portfolio-fork
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run CRUD script
+        run: node app.js > docs/latest-output.txt
+
+      - name: Write build info
+        run: |
+          GENERATED_AT=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          COMMIT_SHA=${GITHUB_SHA}
+          cat > docs/build-info.json << EOF
+          {"generatedAt":"${GENERATED_AT}","commit":"${COMMIT_SHA}"}
+          EOF
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy-pages:
+    needs: build-report
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
