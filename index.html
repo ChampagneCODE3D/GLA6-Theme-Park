@@ -6,14 +6,16 @@
  <title>GLA6 Theme Park</title>
  <style>
  :root {
- --ink: #2b2a3a;
- --muted: #5f5a71;
- --warm-1: #ff9a3c;
- --warm-2: #ff5e78;
- --warm-3: #ffd166;
- --bg: #fff7ef;
- --card: rgba(255,255,255,0.9);
- --ring: rgba(255, 94, 120, 0.3);
+ --blue-900: #0f2747;
+ --blue-800: #173a67;
+ --blue-700: #1f4f89;
+ --orange-500: #e88a2f;
+ --orange-400: #f3a347;
+ --cream: #f8f3ea;
+ --ink: #1d2735;
+ --muted: #556579;
+ --card: rgba(255, 255, 255, 0.92);
+ --ring: rgba(31, 79, 137, 0.34);
  }
 
  * { box-sizing: border-box; }
@@ -23,10 +25,9 @@
  font-family: Segoe UI, Trebuchet MS, Arial, sans-serif;
  color: var(--ink);
  background:
- radial-gradient(circle at 10% 10%, rgba(255, 154, 60, 0.35), transparent 28%),
- radial-gradient(circle at 90% 0%, rgba(255, 94, 120, 0.28), transparent 24%),
- radial-gradient(circle at 50% 100%, rgba(255, 209, 102, 0.32), transparent 34%),
- var(--bg);
+ radial-gradient(circle at 8% 10%, rgba(243, 163, 71, 0.28), transparent 24%),
+ radial-gradient(circle at 92% 8%, rgba(31, 79, 137, 0.30), transparent 28%),
+ linear-gradient(180deg, #fbf7ef 0%, var(--cream) 100%);
  min-height: 100vh;
  display: grid;
  place-items: center;
@@ -34,48 +35,49 @@
  }
 
  .shell {
- width: min(880px, 100%);
- background: var(--card);
- border: 1px solid rgba(255,255,255,0.75);
+ width: min(920px, 100%);
  border-radius: 24px;
- box-shadow: 0 18px 48px rgba(53, 30, 70, 0.14);
  overflow: hidden;
+ border: 1px solid rgba(255, 255, 255, 0.78);
+ background: var(--card);
+ box-shadow: 0 20px 52px rgba(16, 35, 61, 0.15);
  backdrop-filter: blur(8px);
  }
 
  .hero {
- padding: 30px 30px 16px;
- background: linear-gradient(135deg, rgba(255,154,60,0.18), rgba(255,94,120,0.18));
- border-bottom: 1px solid rgba(0,0,0,0.05);
+ padding: 30px 30px 18px;
+ color: #fff;
+ background:
+ linear-gradient(120deg, rgba(15, 39, 71, 0.95) 0%, rgba(31, 79, 137, 0.90) 58%, rgba(232, 138, 47, 0.84) 100%);
+ border-bottom: 1px solid rgba(255, 255, 255, 0.2);
  }
 
  .badge {
  display: inline-block;
- font-weight: 700;
  font-size: 12px;
+ font-weight: 700;
  letter-spacing: 0.08em;
  text-transform: uppercase;
- color: #7a2f3f;
- background: rgba(255,255,255,0.8);
- border: 1px solid rgba(255,94,120,0.25);
- border-radius: 999px;
  padding: 6px 10px;
+ border-radius: 999px;
+ color: #10243f;
+ background: rgba(255, 255, 255, 0.86);
  margin-bottom: 10px;
  }
 
  h1 {
  margin: 0;
- font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+ font-size: clamp(1.9rem, 3.2vw, 2.7rem);
  line-height: 1.1;
- color: #2c233a;
+ letter-spacing: 0.01em;
  }
 
  .sub {
  margin: 12px 0 0;
- font-size: 1.03rem;
- color: var(--muted);
- max-width: 64ch;
- line-height: 1.6;
+ max-width: 66ch;
+ line-height: 1.58;
+ color: rgba(255, 255, 255, 0.95);
+ font-size: 1.02rem;
  }
 
  .grid {
@@ -88,15 +90,15 @@
  .card {
  border-radius: 16px;
  padding: 14px;
- background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,248,238,0.95));
- border: 1px solid rgba(255, 94, 120, 0.12);
- box-shadow: 0 8px 22px rgba(55, 28, 73, 0.08);
+ background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 243, 234, 0.95));
+ border: 1px solid rgba(31, 79, 137, 0.16);
+ box-shadow: 0 8px 20px rgba(19, 42, 73, 0.08);
  }
 
  .card h2 {
  margin: 0 0 8px;
- font-size: 1.02rem;
- color: #55335d;
+ font-size: 1.03rem;
+ color: var(--blue-800);
  }
 
  .card p {
@@ -126,23 +128,21 @@
 
  .btn-primary {
  color: #fff;
- background: linear-gradient(135deg, var(--warm-2), #ff7f50);
- box-shadow: 0 10px 22px rgba(255, 94, 120, 0.28);
+ background: linear-gradient(135deg, var(--blue-700), var(--blue-900));
+ box-shadow: 0 10px 24px rgba(15, 39, 71, 0.26);
  }
 
  .btn-ghost {
- color: #6a3d53;
- border: 1px solid rgba(106, 61, 83, 0.25);
- background: rgba(255,255,255,0.75);
+ color: #744314;
+ border: 1px solid rgba(232, 138, 47, 0.38);
+ background: linear-gradient(135deg, rgba(243, 163, 71, 0.24), rgba(255, 255, 255, 0.72));
  }
 
- .btn:hover {
- transform: translateY(-1px);
- }
+ .btn:hover { transform: translateY(-1px); }
 
  .footer {
  padding: 0 30px 24px;
- color: #7a7688;
+ color: #697a91;
  font-size: 0.86rem;
  }
 
@@ -157,21 +157,21 @@
  <section class=hero>
  <span class=badge>GLA6 Live Fallback</span>
  <h1>Theme Park Portfolio is Live</h1>
- <p class=sub>Warm and playful single-page deployment is active while full workflow publishing gets finalized. You have a working URL now and can swap in the full build the moment Actions restrictions are lifted.</p>
+ <p class=sub>Blue-orange theme is now active for a friendlier look while full workflow publishing is finalized. The URL is live and ready for quick updates.</p>
  </section>
 
  <section class=grid>
  <article class=card>
  <h2>Current Status</h2>
- <p>Branch-based Pages deployment is active from main root and publicly reachable.</p>
+ <p>Branch-based Pages deployment is active from the repository root and publicly reachable.</p>
  </article>
  <article class=card>
  <h2>Next Step</h2>
- <p>Re-enable the full workflow-driven publish for the complete multi-page experience.</p>
+ <p>Restore complete workflow-driven publishing for the full multi-page project when billing restrictions are removed.</p>
  </article>
  <article class=card>
  <h2>Repository</h2>
- <p>Source of truth remains in the ChampagneCODE3D GLA6 project repository.</p>
+ <p>Source of truth remains in the ChampagneCODE3D GLA6 Theme Park repository.</p>
  </article>
  </section>
 
@@ -181,7 +181,7 @@
  </section>
 
  <section class=footer>
- Published on GitHub Pages - ChampagneCODE3D/GLA6-Theme-Park
+ Published on GitHub Pages | ChampagneCODE3D/GLA6-Theme-Park
  </section>
  </main>
 </body>
